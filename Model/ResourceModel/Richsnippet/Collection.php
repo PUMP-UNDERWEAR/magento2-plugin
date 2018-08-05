@@ -1,9 +1,5 @@
 <?php
 namespace Yotpo\Yotpo\Model\ResourceModel\Richsnippet;
-/**
- * Class Collection
- * @package Innovadeltech\Wishlist\Model\ResourceModel\Management
- */
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     protected function _construct()
