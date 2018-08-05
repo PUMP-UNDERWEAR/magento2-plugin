@@ -64,3 +64,4 @@ class RichSnippets extends \Magento\Framework\App\Helper\AbstractHelper
     return true;
         
     }
+}
