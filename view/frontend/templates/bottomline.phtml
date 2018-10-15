@@ -4,6 +4,7 @@
     div.yotpo.bottomLine { display: inline-block; margin: 0 10px 1px 0;}
     .thumbnail .yotpo a { display: inline-block; }
     div.yotpo.QABottomLine { display: inline-block; }
+    .product-info-main .product-reviews-summary{width:100%;}
 </style>
 <?php } ?>
 
@@ -14,7 +15,9 @@
 </div>
 <?php } ?>
 
-<?php 
-    if($this->isRenderBottomlineQna()){
-        echo $this->helper('Yotpo\Yotpo\Helper\Data')->showQABottomline($this,false,false);
-} ?>
+<?php	if($this->isRenderBottomlineQna()){ ?>
+        <div class="yotpo QABottomLine"
+			data-appkey="<?php echo $this->getAppKey() ?>"
+			data-product-id="<?php echo $this->getProductId() ?>">
+		</div>
+<?php } ?>
