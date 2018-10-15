@@ -9,7 +9,7 @@ class YotpoReviewRenderer extends \Magento\Review\Block\Product\ReviewRenderer
     const MAGENTO_DEFAULT_REVIEWS_ENABLED = 'yotpo/settings/mdr_enabled';
     protected $_availableTemplates = [
         self::FULL_VIEW => 'Magento_Review::helper/summary.phtml',
-        self::SHORT_VIEW => 'Magento_Review::summary_short.phtml',
+        self::SHORT_VIEW => 'Magento_Review::helper/summary_short.phtml',
     ];
     
     public function getReviewsSummaryHtml(
@@ -18,26 +18,12 @@ class YotpoReviewRenderer extends \Magento\Review\Block\Product\ReviewRenderer
         $displayIfNoReviews = false
     ) {
         
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
-        $cp = $objectManager->get('\Magento\Framework\App\Request\Http');
         $enableBottomlineCategoryPage = $this->isBottomlineCategoryEnabled();
-		$enableMagentoDefaultReviews = $this->isMagentoDefaultReviewsEnabled();
-		
+	$enableMagentoDefaultReviews = $this->isMagentoDefaultReviewsEnabled();
         if ($enableBottomlineCategoryPage) {
-			if ($cp->getFullActionName()==='cms_index_index'){
-				return $this->showCategoryBottomLine($product);
-			}
-			if ($cp->getFullActionName()==='catalog_category_view'){
-				return $this->showCategoryBottomLine($product);
-			}
+            return $this->showCategoryBottomLine($product);
         } elseif (!$enableMagentoDefaultReviews) {
-            if ($cp->getFullActionName()==='cms_index_index'){
-                return parent::getReviewsSummaryHtml($product, 'default', $displayIfNoReviews);
-            }
-			if ($cp->getFullActionName()==='catalog_category_view'){
-                return parent::getReviewsSummaryHtml($product, 'default', $displayIfNoReviews);
-            }
+            return parent::getReviewsSummaryHtml($product, $templateType, $displayIfNoReviews);
         } else {
             return '';
         }
